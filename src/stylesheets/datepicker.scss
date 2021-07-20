@@ -10,12 +10,40 @@
 .react-datepicker {
   font-family: $datepicker__font-family;
   font-size: $datepicker__font-size;
-  background-color: #fff;
+  background-color: $datepicker__colorGray2;
   color: $datepicker__text-color;
-  border: 1px solid $datepicker__border-color;
   border-radius: $datepicker__border-radius;
+  box-shadow: 0 0 20px rgba(100, 100, 100, 0.25);
   display: inline-block;
   position: relative;
+  padding: 20px;
+}
+
+.react-datepicker__header-title {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  user-select: none;
+}
+.react-datepicker__header-prev {
+  height: 20px;
+  width: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  left: 30px;
+  cursor: pointer;
+}
+.react-datepicker__header-next {
+  height: 20px;
+  width: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  right: 30px;
+  cursor: pointer;
 }
 
 .react-datepicker--time-only {
@@ -37,6 +65,7 @@
 .react-datepicker__triangle {
   position: absolute;
   left: 50px;
+  display: none;
 }
 
 .react-datepicker-popper {
@@ -87,8 +116,8 @@
 
 .react-datepicker__header {
   text-align: center;
-  background-color: $datepicker__background-color;
-  border-bottom: 1px solid $datepicker__border-color;
+  //background-color: $datepicker__background-color;
+  //border-bottom: 1px solid $datepicker__border-color;
   border-top-left-radius: $datepicker__border-radius;
   padding: 8px 0;
   position: relative;
@@ -122,9 +151,10 @@
 .react-datepicker-time__header,
 .react-datepicker-year-header {
   margin-top: 0;
+  margin-bottom: 12px;
   color: $datepicker__header-color;
   font-weight: bold;
-  font-size: $datepicker__font-size * 1.18;
+  font-size: $datepicker__font-size * 1.48;
 }
 
 .react-datepicker-time__header {
@@ -141,7 +171,7 @@
   text-align: center;
   cursor: pointer;
   position: absolute;
-  top: 2px;
+  top: 20px;
   padding: 0;
   border: none;
   z-index: 1;
@@ -151,11 +181,11 @@
   overflow: hidden;
 
   &--previous {
-    left: 2px;
+    left: 20px;
   }
 
   &--next {
-    right: 2px;
+    right: 20px;
 
     &--with-time:not(&--with-today-button) {
       right: 85px;
@@ -381,17 +411,30 @@
 
 .react-datepicker__day-names {
   margin-bottom: -8px;
+  font-weight: 600;
+}
+.react-datepicker__day-name{
+  color: $datepicker__text-color;
+  display: inline-block;
+  width: $datepicker__item-size * 1.2;
+  line-height: $datepicker__item-size;
+  text-align: center;
+  margin: $datepicker__day-margin;
+  text-transform: uppercase;
+  user-select: none;
 }
 
-.react-datepicker__day-name,
 .react-datepicker__day,
 .react-datepicker__time-name {
   color: $datepicker__text-color;
   display: inline-block;
-  width: $datepicker__item-size;
-  line-height: $datepicker__item-size;
+  width: $datepicker__item-size * 1.2;
+  height: $datepicker__item-size * 1.2;
+  line-height: $datepicker__item-size * 1.2;
   text-align: center;
-  margin: $datepicker__day-margin;
+  padding: $datepicker__day-margin;
+  margin: $datepicker__day-margin * 1.2 0;
+  font-size: $datepicker__font-size * 1.2;
 }
 
 .react-datepicker__month,
@@ -424,12 +467,18 @@
 .react-datepicker__quarter-text,
 .react-datepicker__year-text {
   cursor: pointer;
+  background-color: transparent;
+  border-radius: 50%;
+  transition: 0.1s;
 
   &:hover {
-    border-radius: $datepicker__border-radius;
-    background-color: $datepicker__background-color;
+    //border-radius: $datepicker__border-radius;
+    &:not(&--in-range){
+      background-color: darken($datepicker__colorGreen, 5%);
+      border-radius: 50%;
+      color: #fff;
+    }
   }
-
   &--today {
     font-weight: bold;
   }
@@ -452,30 +501,52 @@
     }
   }
 
-  &--selected,
-  &--in-selecting-range,
-  &--in-range {
-    border-radius: $datepicker__border-radius;
-    background-color: $datepicker__selected-color;
+  &--selected {
+    background-color: $datepicker__colorGreen;
     color: #fff;
+    border-radius: 50%;
 
     &:hover {
-      background-color: darken($datepicker__selected-color, 5%);
+      //background-color: darken($datepicker__selected-color, 5%);
+    }
+  }
+  &--in-selecting-range {
+    border-radius: 0;
+    color: #fff;
+  }
+  &--in-range {
+    background-color: $datepicker__colorGreen;
+    color: #fff;
+    border-radius: 0;
+    &:hover{
+      border-radius: 0;
+    }
+  }
+  &--range-start {
+    border-radius: 50% 0 0 50%;
+    &:hover {
+      border-radius: 50% 0 0 50%;
+    }
+  }
+  &--range-end {
+    border-radius: 0 50% 50% 0;
+    &:hover {
+      border-radius: 0 50% 50% 0;
     }
   }
 
   &--keyboard-selected {
-    border-radius: $datepicker__border-radius;
-    background-color: lighten($datepicker__selected-color, 10%);
-    color: #fff;
+    //border-radius: $datepicker__border-radius;
+    //background-color: lighten($datepicker__selected-color, 10%);
+    //color: #fff;
 
     &:hover {
-      background-color: darken($datepicker__selected-color, 5%);
+      //background-color: darken($datepicker__selected-color, 5%);
     }
   }
 
   &--in-selecting-range:not(&--in-range) {
-    background-color: rgba($datepicker__selected-color, 0.5);
+    background-color: $datepicker__colorGreen;
   }
 
   &--in-range:not(&--in-selecting-range) {
@@ -493,6 +564,21 @@
       background-color: transparent;
     }
   }
+}
+.react-datepicker__day--in-range:nth-last-child(1), .react-datepicker__day--in-selecting-range:nth-last-child(1) {
+  border-radius: 0 50% 50% 0;
+}
+.react-datepicker__day--in-range:nth-child(1), .react-datepicker__day--in-selecting-range:nth-child(1) {
+  border-radius: 50% 0 0 50%;
+}
+.react-datepicker__day--selecting-range-start {
+  border-radius: 50% 0 0 50%;
+}
+.react-datepicker__day--in-selecting-range:hover {
+  border-radius: 0 50% 50% 0;
+}
+.react-datepicker__day--range-start.react-datepicker__day--range-end {
+  border-radius: 50%;
 }
 
 .react-datepicker__month-text,
@@ -679,4 +765,8 @@
   .react-datepicker-time__header {
     font-size: $datepicker__font-size * 1.8;
   }
+}
+
+.react-datepicker__current-month {
+  font-weight: 600;
 }

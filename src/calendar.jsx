@@ -373,6 +373,26 @@ export default class Calendar extends React.Component {
         </div>
       );
     }
+
+    function correctDay(number) {
+      switch (number) {
+        case 0:
+          return 'Sun';
+        case 1:
+          return 'Mon';
+        case 2:
+          return 'Tue';
+        case 3:
+          return 'Wed';
+        case 4:
+          return 'Thu';
+        case 5:
+          return 'Fri';
+        case 6:
+          return 'Sat';
+      }
+    }
+
     return dayNames.concat(
       [0, 1, 2, 3, 4, 5, 6].map((offset) => {
         const day = addDays(startOfWeek, offset);
@@ -390,7 +410,7 @@ export default class Calendar extends React.Component {
               weekDayClassName
             )}
           >
-            {weekDayName}
+            {correctDay(offset)}
           </div>
         );
       })
@@ -686,7 +706,19 @@ export default class Calendar extends React.Component {
           : ""
       }`}
     >
-      {this.renderCurrentMonth(monthDate)}
+      <div className={'react-datepicker__header-title'}>
+        <div className={'react-datepicker__header-prev'} onClick={()=>{this.decreaseMonth()}}>
+          <svg width="8" height="14" viewBox="0 0 8 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M7 13L1 7L7 1" stroke="#65C898" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        {this.renderCurrentMonth(monthDate)}
+        <div className={'react-datepicker__header-next'} onClick={()=>{this.increaseMonth()}}>
+          <svg width="8" height="14" viewBox="0 0 8 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M1 13L7 7L1 1" stroke="#65C898" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+      </div>
       <div
         className={`react-datepicker__header__dropdown react-datepicker__header__dropdown--${this.props.dropdownMode}`}
         onFocus={this.handleDropdownFocus}
@@ -958,8 +990,10 @@ export default class Calendar extends React.Component {
           showPopperArrow={this.props.showPopperArrow}
           arrowProps={this.props.arrowProps}
         >
+          {/*}
           {this.renderPreviousButton()}
           {this.renderNextButton()}
+          */}
           {this.renderMonths()}
           {this.renderYears()}
           {this.renderTodayButton()}

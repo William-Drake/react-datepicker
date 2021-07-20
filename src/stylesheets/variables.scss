@@ -10,11 +10,19 @@ $datepicker__navigation-disabled-color: lighten(
   10%
 ) !default;
 
-$datepicker__border-radius: 0.3rem !default;
+$datepicker__border-radius: 12px !default;
 $datepicker__day-margin: 0.166rem !default;
 $datepicker__font-size: 0.8rem !default;
-$datepicker__font-family: "Helvetica Neue", helvetica, arial, sans-serif !default;
+$datepicker__font-family: "Roboto", "Helvetica Neue", helvetica, arial, sans-serif !default;
 $datepicker__item-size: 1.7rem !default;
 $datepicker__margin: 0.4rem !default;
 $datepicker__navigation-button-size: 32px !default;
 $datepicker__triangle-size: 8px !default;
+
+$datepicker__colorGreen: #65C898 !default;
+$datepicker__colorBlue: #75B7D8 !default;
+$datepicker__colorRed: #FA6B6B !default;
+$datepicker__colorYellow: #F2B744 !default;
+$datepicker__colorGray1: #333333 !default;
+$datepicker__colorGray2: #F7F7F7 !default;
+$datepicker__colorGray3: #C9CED1 !default;
