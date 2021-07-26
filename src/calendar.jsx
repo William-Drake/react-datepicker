@@ -709,13 +709,13 @@ export default class Calendar extends React.Component {
       <div className={'react-datepicker__header-title'}>
         <div className={'react-datepicker__header-prev'} onClick={()=>{this.decreaseMonth()}}>
           <svg width="8" height="14" viewBox="0 0 8 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M7 13L1 7L7 1" stroke="#65C898" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M7 13L1 7L7 1" stroke="#65C898" strokeWidth="2" strokeLinecap="round" stroke-linejoin="round"/>
           </svg>
         </div>
         {this.renderCurrentMonth(monthDate)}
         <div className={'react-datepicker__header-next'} onClick={()=>{this.increaseMonth()}}>
           <svg width="8" height="14" viewBox="0 0 8 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M1 13L7 7L1 1" stroke="#65C898" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M1 13L7 7L1 1" stroke="#65C898" strokeWidth="2" strokeLinecap="round" stroke-linejoin="round"/>
           </svg>
         </div>
       </div>
